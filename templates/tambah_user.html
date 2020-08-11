@@ -1,0 +1,66 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+<div class="content-wrapper">
+  <br>
+
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md">
+            <h3>Tambah User</h3>
+            <div class="card card-body">
+              <form method="POST" action="" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group row">
+                  <label for="keterangan" class="col-sm-2 col-form-label">Masukkan Username</label>
+                  <div class="col-sm-10">
+                    {{form.username}}
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="keterangan" class="col-sm-2 col-form-label">Masukkan Email</label>
+                  <div class="col-sm-10">
+                    {{form.email}}
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="keterangan" class="col-sm-2 col-form-label">Masukkan Password</label>
+                  <div class="col-sm-10">
+                    {{form.password1}}
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="keterangan" class="col-sm-2 col-form-label">Konfirmasi Password</label>
+                  <div class="col-sm-10">
+                    {{form.password2}}
+                  </div>
+                </div>
+                <input class="btn btn-sm btn-info" type="submit" name="Tambah User" value="Tambah User">
+              </form>
+            </div>
+            {{form.errors}}
+          </div>
+        </div>
+
+        </div>
+        </section><!-- /.container-fluid -->
+        </div>
+
+//Query All input fields
+<script>
+var select_fields = document.getElementsByTagName('select')
+
+var input_fields = document.getElementsByTagName('input')
+
+
+for (var field in select_fields){
+  select_fields[field].className += ' form-control'
+}
+for (var field in input_fields){
+  input_fields[field].className += ' form-control'
+}
+</script>
+
+{% endblock %}

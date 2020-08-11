@@ -1,0 +1,17 @@
+<div class="overflow-auto" id="chat-scroll">
+  <div class="card-body" style="max-height: 300px;">
+    {% for i in chatdata %}
+    <div style="width: max-content; max-width: 70%;">
+      <div class="card p-2 round-2 bg-secondary mb-0 mt-4">
+        {{i.text}}
+      </div>
+      <small class="text-muted">{{i.sender}}, {{i.created_at}}</small>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<script>
+	var element = document.getElementById("chat-scroll");
+  		element.scrollTop = element.scrollHeight;
+</script>

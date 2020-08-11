@@ -1,0 +1,125 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <!-- <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="">Beranda</a></li>
+            <li class="breadcrumb-item"><a href="#">Detail Pengaduan</a></li>
+          </ol>
+        </nav> -->
+    <br>
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md">
+            <h3>Detail Pengaduan</h3>
+            <div class="card card-body">
+              <form>
+                {% csrf_token %}
+                <div class="form-group row">
+                  <label for="tglpengaduan" class="col-sm-2 col-form-label">Nama Klien</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="namaclient" value="{{pengaduan.client}}" disabled>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="tglpengaduan" class="col-sm-2 col-form-label">Tgl Pengaduan</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="tglpengaduan" value="{{pengaduan.date_created|date:'d F Y, H:i e'}}" disabled>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="ktgpengaduan" class="col-sm-2 col-form-label">Kategori Pengaduan</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="ktgpengaduan" value="{{pengaduan.kategori_pengaduan}}" disabled>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="keterangan" class="col-sm-2 col-form-label">Status Penanganan</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="keterangan" value="{{pengaduan.kategori_penanganan}}" disabled>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="keterangan" class="col-sm-2 col-form-label">Keluhan User</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="keluhanterakhir" value="{{pengaduan.keluhan}}" disabled>
+                  </div>
+                </div>
+              </form>
+            </div>
+
+                <div class="card">
+                  <div class="card-header form-inline">
+                    Percakapan
+                    <div class="ml-auto" style="width: max-content">
+                      <button class="btn btn-info" id="refresh_chat">Refresh</button>
+                    </div>
+                  </div>
+                  <div id="chat_wrapper">
+                    <div class="overflow-auto" id="chat-scroll">
+                      <div class="card-body" style="max-height: 300px;">
+                          <div style="width: max-content; max-width: 70%;">
+                            <div class="card p-2 round-2 bg-info mb-0 mt-4">
+                              {{pengaduan.keluhan}}
+                            </div>
+                            <small class="text-muted">{{pengaduan.client}}, {{pengaduan.date_created}}</small>
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div id="chat_wrapper">
+                    <div class="overflow-auto" id="chat-scroll">
+                      <div class="card-body" style="max-height: 300px;">
+                        {% if chatdata.count < 1 %}
+                          <div class="mx-auto" style="width: max-content;">
+                            Belum ada Balasan
+                          </div>
+                        {% else %}
+                          {% for i in chatdata %}
+                          <div style="width: max-content; max-width: 70%;">
+                            <div class="card p-2 round-2 bg-secondary mb-0 mt-4">
+                              {{i.text}}
+                            </div>
+                            <small class="text-muted">{{i.sender}}, {{i.created_at}}</small>
+                          </div>
+                          {% endfor %}
+                        {% endif %}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+          </div>
+        </div>
+
+        </div>
+        </section>
+        </div>
+
+//Query All input fields
+<script>
+var select_fields = document.getElementsByTagName('select')
+
+var input_fields = document.getElementsByTagName('input')
+
+
+for (var field in select_fields){
+  select_fields[field].className += ' form-control'
+}
+for (var field in input_fields){
+  input_fields[field].className += ' form-control'
+}
+</script>
+
+{% endblock %}

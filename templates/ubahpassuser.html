@@ -1,0 +1,45 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+<div class="content-wrapper">
+
+    <section class="content">
+      <div class="container-fluid">
+          <br>
+          <div class="row">
+            <div class="col-md-12">
+              <h3>Ubah Password</h3>
+              <div class="card card-body">
+                <form method="POST" action="" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  {{form.as_p}}
+                  <input class="btn btn-primary" type="submit" name="Update Information">
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        </section><!-- /.container-fluid -->
+
+
+
+
+        </div>
+
+//Query All input fields
+<script>
+var select_fields = document.getElementsByTagName('select')
+
+var input_fields = document.getElementsByTagName('input')
+
+
+for (var field in select_fields){
+  select_fields[field].className += ' form-control'
+}
+for (var field in input_fields){
+  input_fields[field].className += ' form-control'
+}
+</script>
+
+{% endblock %}

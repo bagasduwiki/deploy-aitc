@@ -1,0 +1,67 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+<div class="content-wrapper">
+    <br>
+      <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <h3>Profil Admin</h3>
+        <!-- <a class="btn btn-md btn-info" href="{% url 'tambahadmin' %}">Tambah Admin</a> -->
+        <a class="btn btn-md btn-info" href="{% url 'ubahpassword' %}">Ubah Password</a>
+        <div class="row">
+          <div class="col">
+            <br>
+            <div class="row">
+              <div class="col-md">
+                <div class="card card-body">
+                  <form method="POST" action="" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="input-group mb-2">
+                      <label for="keterangan" class="col-sm-2 col-form-label">Nama</label>
+                      {{form.nama}}
+                    </div>
+                    <div class="input-group mb-2">
+                      <label for="keterangan" class="col-sm-2 col-form-label">Alamat</label>
+                      {{form.alamat}}
+                    </div>
+                    <div class="input-group mb-2">
+                      <label for="keterangan" class="col-sm-2 col-form-label">Kontak</label>
+                      {{form.no_hp}}
+                    </div>
+                    <div class="input-group mb-2">
+                      <label for="keterangan" class="col-sm-2 col-form-label">Email</label>
+                      {{form.email}}
+                    </div>
+                    <input class="btn btn-primary" type="submit" name="Update Information" value="Update Information">
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section><!-- /.container-fluid -->
+
+
+
+
+        </div>
+
+//Query All input fields
+<script>
+var select_fields = document.getElementsByTagName('select')
+
+var input_fields = document.getElementsByTagName('input')
+
+
+for (var field in select_fields){
+  select_fields[field].className += ' form-control'
+}
+for (var field in input_fields){
+  input_fields[field].className += ' form-control'
+}
+</script>
+
+{% endblock %}

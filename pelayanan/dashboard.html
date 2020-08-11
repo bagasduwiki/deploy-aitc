@@ -1,0 +1,74 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+<!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <br>
+
+    <!-- Main content -->
+    {% if request.user.is_staff %}
+    <section class="content">
+      <div class="container-fluid">
+        {% include 'status.html' %}
+        <div class="row">
+          <div class="col">
+              <div class="row">
+                <div class="col-md">
+                  <h3>Data Pengaduan</h3>
+                  <div class="card card-body">
+                    <table class="table table-striped table-bordered" id="tabledashboard">
+                      <thead class="text-center">
+                        <tr class="bg-info">
+                          <th class="bg-info" data-colname="tglpengaduan" data-order="desc">Tgl Pengaduan</th>
+                          <th data-colname="client" data-order="desc">Client</th>
+                          <th data-colname="masalah" data-order="desc">Problem</th>
+                          <th data-colname="kategori" data-order="desc">Status Penanganan</th>
+                          <th>Aksi</th>
+                        </tr>
+                      </thead>
+
+                      <tbody class="text-center">
+                        {% for pengaduan in pengaduan %}
+                        <tr>
+                          <td>{{pengaduan.date_created|date:'d F Y, H:i e'}}</td>
+                          <td>{{pengaduan.client}}</td>
+                          <td>{{pengaduan.keluhan}}</td>
+                          <td>{{pengaduan.kategori_penanganan}}</td>
+                          <td><a class="btn btn-sm btn-info" href="{% url 'detaildaftar' pengaduan.id %}"><i class="fa fa-folder">&nbsp</i>Info</a></td>
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            </div>
+          </div>
+
+        </section>
+        {% endif %}
+        </div>
+
+<script type="text/javascript">
+  document.getElementById('button').addEventListener('click', function(){
+    document.querySelector('.bg-modal').style.display = 'flex';
+  });
+
+  document.querySelector('.close').addEventListener('click', function(){
+    document.querySelector('.bg-modal').style.display = 'none';
+  });
+</script>
+<script type="text/javascript">
+    $(document).ready( function () {
+      $('#tabledashboard').DataTable({
+        "lengthMenu": [[5, 10, 20, 50, -1], [5, 10, 20, 50, "All"]]
+      });
+      });
+</script>
+
+{% endblock %}
